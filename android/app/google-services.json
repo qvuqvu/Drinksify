@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "385704122512",
+    "project_id": "drinksify-ed013",
+    "storage_bucket": "drinksify-ed013.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385704122512:android:7a925de7e58bbdaa9b2015",
+        "android_client_info": {
+          "package_name": "com.Drinksify"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385704122512-l7hk77c0gq8f35c00ql5mkvsp06anf3r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Drinksify",
+            "certificate_hash": "d32693e93e89ead425734a9e6756bd460d1cd12b"
+          }
+        },
+        {
+          "client_id": "385704122512-fd8dtsc2mepjba96hkkastnr2h0ahf9m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-icpsYMfYM-SfVen467sjzIu2rcC42xM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385704122512-fd8dtsc2mepjba96hkkastnr2h0ahf9m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
