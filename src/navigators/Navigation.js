@@ -25,6 +25,7 @@ import fireauth from '@react-native-firebase/auth';
 import SearchProduct from '../screens/searchProduct';
 import {useTranslation} from 'react-i18next';
 import {useSelector} from 'react-redux';
+import SignUp from '../screens/SignUp';
 const Navigation = () => {
   async function onDisplayNotification(content) {
     const channelId = await notifee.createChannel({
@@ -50,7 +51,7 @@ const Navigation = () => {
       .collection('Orders')
       .where('userID', '==', fireauth().currentUser.uid)
       .onSnapshot(snapShot => {
-        let change = snapShot.docChanges();
+        let change = snapShot.docChanges;
         change.forEach(change => {
           if (change.type == 'modified') {
             if (change.doc.data().state == 'completed') {
@@ -69,6 +70,7 @@ const Navigation = () => {
         <Stack.Screen name="Main" component={Bottomtab} />
         <Stack.Screen name="TopTabOrder" component={TopTabOrder} />
         <Stack.Screen name="Detail" component={DetailProduct} />
+        {/* <Stack.Screen name="SignUp" component={SignUp} /> */}
         <Stack.Screen name="Payment" component={Payment} />
         <Stack.Screen name="Order" component={Order} />
         <Stack.Screen name="SearchProduct" component={SearchProduct} />
