@@ -40,7 +40,7 @@ const style = StyleSheet.create({
     flexDirection: 'row',
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderRadius: 5,
+    borderRadius: 20,
     borderColor: '#C5C5C5',
   },
 });
