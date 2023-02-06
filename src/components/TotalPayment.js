@@ -28,7 +28,7 @@ const TotalPrice = ({total, amount}) => {
   return (
     <View>
       <Text style={{color: 'white'}}>
-        {t('DeliveryPayment')} 🌟 {amount}{' '}
+        {t('DeliveryPayment')} {amount}{' '}
         {amount == 1 ? t('Item') : t('Items')}
       </Text>
       <Text style={{fontWeight: '600', color: 'white'}}>
