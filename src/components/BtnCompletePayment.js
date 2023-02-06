@@ -39,7 +39,7 @@ const BtnCompletePayment = () => {
   let time = null;
   let address = useSelector(selectedAddress);
 
-  const addOrderToFireBase = async () => {
+  const addOrderToFireBase = async () => {  
     await firestore()
       .collection('Orders')
       .add({
