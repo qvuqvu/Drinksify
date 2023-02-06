@@ -6,14 +6,16 @@ import Vertify from '../screens/Vertify';
 import Register from '../screens/Register';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SignUp from '../screens/SignUp';
 const Stack = createNativeStackNavigator();
 const SiginInNavigate = () => {
   return (
     <NavigationContainer>
           <Stack.Navigator screenOptions={{ headerShown: false}}>
             <Stack.Screen name="SignIn" component={SignIn} />
-            {/* <Stack.Screen name="Register" component={Register} /> */}
-            <Stack.Screen name="Vertify" component={Vertify} />
+            {/* <Stack.Screen name="SignUp" component={SignUp} /> */}
+            <Stack.Screen name="Register" component={Register} />
+            {/* <Stack.Screen name="Vertify" component={Vertify} /> */}
           </Stack.Navigator>
         </NavigationContainer>
   )
