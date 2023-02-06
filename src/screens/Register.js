@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View, TouchableOpacity, Keyboard} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import Input from '../components/input';
+import {signUp} from '../utils/Auth';
 import DropDownPicker from 'react-native-dropdown-picker';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -26,7 +27,7 @@ const Register = ({setProfileUpdated}) => {
   const [errors, setErrors] = useState({});
   const UpdateProfile = async () => {
     // console.log(inputs)
-    
+
     await firestore()
       .collection('Users')
       .doc(auth().currentUser.uid)
@@ -34,11 +35,14 @@ const Register = ({setProfileUpdated}) => {
       .then(() => {});
     await auth().currentUser.updateProfile({displayName: inputs.name});
     setProfileUpdated(true);
+
   };
   const validate = () => {
     let isFull = true;
     const validRegex =
       /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const PhoneFormatCharacter = /[!@#$%^&*()_\-=\[\]{};':"\\|,.<>\/?]+/;
+    const phoneFormat = /^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\./0-9]*$/;
     Keyboard.dismiss();
     if (!auth().currentUser?.email)
       if (!inputs.email) {
@@ -62,12 +66,48 @@ const Register = ({setProfileUpdated}) => {
     if (!inputs?.gender) {
       setGenderFill(false);
     }
+    if (!inputs.phone) {
+      handleErrors('Nhập số điện thoại', 'phone');
+    } else if (
+      !inputs.phone.match(phoneFormat) ||
+      inputs.phone.match(PhoneFormatCharacter)
+    ) {
+      ToastAndroid.show('Kiểm tra số điện thoại', 3);
+      return;
+    }
+    if (!inputs.password) {
+      handleErrors('Please input password', 'password');
+    }
+    if (!inputs.confirmpassword) {
+      handleErrors('Please input confirm password', 'confirmpassword');
+    }
+    if (inputs.password && inputs.password.length < 8) {
+      ToastAndroid.show('Mật khẩu phải nhiều hơn 7 ký tự', 3);
+    }
+    if (
+      inputs.email != '' &&
+      inputs.password != '' &&
+      inputs.confirmpassword != '' &&
+      inputs.name != '' &&
+      inputs.phone != '' &&
+      inputs.dateofbirth != '' &&
+      inputs.gender != ''
+    ) {
+      if (inputs.password == inputs.confirmpassword) {
+        signUp(inputs);
+        // console.log(inputs)
+      } else {
+        ToastAndroid.show('Hai mật khẩu không giống nhau', 3);
+      }
+    } else {
+      ToastAndroid.show('Nhập đầy đủ thông tin', 3);
+    }
 
     // console.log(value)
-    
+
     if (isFull) {
       console.log('first');
-      
+
       // setInputs(prevState => ({...prevState, ['dateofbirth']: date}))
       UpdateProfile();
     }
@@ -89,10 +129,14 @@ const Register = ({setProfileUpdated}) => {
     // await auth().currentUser.updateProfile({displayName: displayName});
   };
   useEffect(() => {
-    setInputs(prevState => ({...prevState, ['phoneNumber']: auth().currentUser.phoneNumber}));
-    if(auth().currentUser.email !== null)
-      setInputs(prevState => ({...prevState, ['email']: auth().currentUser.email}));
-  }, [])
+    if (auth().currentUser) {
+      setInputs(prevState => ({
+        ...prevState,
+        phoneNumber: auth().currentUser.phoneNumber || '',
+        email: auth().currentUser.email || '',
+      }));
+    }
+  }, []);
   return (
     <View style={styles.container}>
       <View
@@ -128,7 +172,14 @@ const Register = ({setProfileUpdated}) => {
         }}
         error={errors.name}
       />
-      {!auth().currentUser.email && (
+      <Input
+        placeholder="Email"
+        keyboardType="email-address"
+        onChangeText={text => handleOnChange(text, 'email')}
+        error={errors.email}
+        onFocus={() => handleErrors(null, 'email')}
+      />
+      {/* {!auth().currentUser.email && (
         <Input
           keyboardType="email-address"
           placeholder={t('Enter your email')}
@@ -137,7 +188,7 @@ const Register = ({setProfileUpdated}) => {
           }}
           error={errors.email}
         />
-      )}
+      )} */}
       <Input
         editable={false}
         value={date.toLocaleDateString()}
@@ -190,6 +241,30 @@ const Register = ({setProfileUpdated}) => {
         onCancel={() => {
           setOpenPicker(false);
         }}
+      />
+      <View style={{marginTop: 20}}>
+        <Input
+          placeholder="Số điện thoại"
+          keyboardType="numeric"
+          onChangeText={text => handleOnChange(text, 'phone')}
+          error={errors.phone}
+          onFocus={() => handleErrors(null, 'phone')}
+        />
+      </View>
+
+      <Input
+        placeholder="Mật khẩu"
+        password
+        onChangeText={text => handleOnChange(text, 'password')}
+        error={errors.password}
+        onFocus={() => handleErrors(null, 'password')}
+      />
+      <Input
+        placeholder="Xác nhận mật khẩu"
+        password
+        onChangeText={text => handleOnChange(text, 'confirmpassword')}
+        error={errors.confirmpassword}
+        onFocus={() => handleErrors(null, 'confirmpassword')}
       />
     </View>
   );
