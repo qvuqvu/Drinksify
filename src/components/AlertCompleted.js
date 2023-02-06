@@ -61,6 +61,7 @@ const Btn = () => {
   const completed = () => {
     dispatch(setCompleted());
     dispatch(openOrCloseModel());
+    navigation.navigate('Order');
   };
   return (
     <View
