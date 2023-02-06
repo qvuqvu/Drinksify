@@ -53,12 +53,12 @@ const Payment = () => {
         <TotalPayment />
         <AlertCompleted />
       </View>
-      {completed && (
+      {completed ? null :  (
         <Loading
           uri={require('../assets/107573-llove-you.json')}
           title={t('Processing')}
         />
-      )}
+      ) }
       <ChooseTime />
     </>
   );
