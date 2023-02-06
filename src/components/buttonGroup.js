@@ -23,7 +23,7 @@ const ButtonGroup = ({ size, onSelect, item }) => {
                             thousandSeparator
                             suffix='đ'
                             renderText={(value) => <Text style={{fontWeight:'bold',color:index==selected?'white':'black', fontSize:14}}>{value}</Text>}
-                        />
+                        /> 
                         </View>
                     </TouchableOpacity>
                 );

@@ -110,7 +110,7 @@ const User = () => {
               width: '30%',
               height: 80,
               borderRadius: 10,
-              backgroundColor: '#F6F1E7',
+              backgroundColor: COLORS.custom
             }}
             activeOpacity={0.6}
             onPress={() => {
@@ -120,12 +120,12 @@ const User = () => {
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <Icon
                 name="create-outline"
-                color={COLORS.custom}
+                color='white'
                 size={28}
                 style={{marginBottom: 4}}
               />
               <Text
-                style={{fontSize: 14, color: COLORS.custom, fontWeight: '500'}}>
+                style={{fontSize: 14, color: 'white', fontWeight: '500'}}>
                 {t('Thông tin')}
               </Text>
             </View>
@@ -135,7 +135,7 @@ const User = () => {
               width: '30%',
               height: 80,
               borderRadius: 10,
-              backgroundColor: '#F6F1E7',
+              backgroundColor: COLORS.custom,
             }}
             activeOpacity={0.6}
             onPress={() => {
@@ -145,12 +145,12 @@ const User = () => {
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <Icon
                 name="location-outline"
-                color={COLORS.custom}
+                color='white'
                 size={28}
                 style={{marginBottom: 4}}
               />
               <Text
-                style={{fontSize: 14, color: COLORS.custom, fontWeight: '500'}}>
+                style={{fontSize: 14, color: 'white', fontWeight: '500'}}>
                 {t('Địa chỉ')}
               </Text>
             </View>
@@ -160,7 +160,7 @@ const User = () => {
               width: '30%',
               height: 80,
               borderRadius: 10,
-              backgroundColor: '#F6F1E7',
+              backgroundColor: COLORS.custom,
             }}
             activeOpacity={0.6}
             onPress={() => {
@@ -170,12 +170,12 @@ const User = () => {
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <Icon
                 name="map-outline"
-                color={COLORS.custom}
+                color='white'
                 size={28}
                 style={{marginBottom: 4}}
               />
               <Text
-                style={{fontSize: 14, color: COLORS.custom, fontWeight: '500'}}>
+                style={{fontSize: 14, color: 'white', fontWeight: '500'}}>
                 {t('Cửa hàng')}
               </Text>
             </View>
