@@ -25,6 +25,9 @@ export default function MoreAddresses({navigation}) {
 const Body = ({navigation}) => {
   const [update, setUpdate] = useState([]);
   const onResult = QuerySnapshot => {
+    if (!QuerySnapshot) {
+      return;
+    }
     const temp = [];
     QuerySnapshot.forEach(documentSnapshot => {
       temp.push(documentSnapshot.data());
