@@ -22,6 +22,41 @@ const SignIn = ({navigation}) => {
     webClientId:
       '385704122512-fd8dtsc2mepjba96hkkastnr2h0ahf9m.apps.googleusercontent.com',
   });
+  const [inputs, setInputs] = useState({
+    email: '',
+    password: '',
+  });
+  const [errors, setErrors] = useState({});
+  const signIn = (email, password) => {
+    auth()
+      .signInWithEmailAndPassword(email, password)
+      .then(() => {
+        ToastAndroid.show('Logged in', ToastAndroid.SHORT);
+      })
+      .catch(err => {
+        Alert.alert('error', err.toString());
+        // ToastAndroid.show(err, ToastAndroid.LONG)
+        console.log(err);
+      });
+  };
+  const validate = () => {
+    Keyboard.dismiss();
+    if (!inputs.email) {
+      handleErrors('please input email', 'email');
+    }
+    if (!inputs.password) {
+      handleErrors('Please input password', 'password');
+    }
+    if (inputs.email != '' && inputs.password != '') {
+      signIn(inputs.email, inputs.password);
+    }
+  };
+  const handleErrors = (errorsMessage, input) => {
+    setErrors(prevState => ({...prevState, [input]: errorsMessage}));
+  };
+  const handleOnChange = (text, input) => {
+    setInputs(prevState => ({...prevState, [input]: text}));
+  };
   const [confirm, setConfirm] = useState(null);
   const [phone, setPhone] = useState('');
   const [isPress, setIsPress] = useState(false);
@@ -29,15 +64,15 @@ const SignIn = ({navigation}) => {
   async function signInWithPhoneNumber(phoneNumber) {
     const format = /[!@#$%^&*()_\-=\[\]{};':"\\|,.<>\/?]+/;
     const formatphone = /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/;
-    if(format.test(phoneNumber) || !formatphone.test(phoneNumber)){
-      ToastAndroid.show("Số điện thoại chưa đúng", 3)
+    if (format.test(phoneNumber) || !formatphone.test(phoneNumber)) {
+      ToastAndroid.show('Số điện thoại chưa đúng', 3);
       return;
     }
     try {
       if (phoneNumber.charAt(0) === '0') {
         let a = phoneNumber.substring(1);
         phoneNumber = '+84'.concat(a);
-        console.log(phoneNumber); 
+        console.log(phoneNumber);
       }
       const confirmation = await auth().signInWithPhoneNumber(phoneNumber);
       await setConfirm(confirmation);
@@ -64,20 +99,34 @@ const SignIn = ({navigation}) => {
             />
           </View>
           <View style={styles.footer}>
-            
             <Text style={styles.name}>Giải khát ngay với Drinksify !</Text>
-            <Input
-              keyboardType="numeric"
-              placeholder={t('Enter your phone number')}
-              onChangeText={text => setPhone(text)}
-            />
-            <TouchableOpacity
-              style={isPress ? styles.btnLogin : styles.btnLogin1}
-              disabled={!isPress}
-              onPress={() => signInWithPhoneNumber(phone)}>
-              <Text style={styles.txtSignin}>{t('Log in')}</Text>
-            </TouchableOpacity>
+            <View style={{height: 130}}>
+              <Input
+                placeholder="Email"
+                iconName="envelope"
+                keyboardType="email-address"
+                onChangeText={text => handleOnChange(text, 'email')}
+                error={errors.email}
+                onFocus={() => handleErrors(null, 'email')}
+              />
 
+              <Input
+                placeholder="Mật khẩu"
+                iconName="lock"
+                password
+                onChangeText={text => handleOnChange(text, 'password')}
+                error={errors.password}
+                onFocus={() => handleErrors(null, 'password')}
+              />
+            </View>
+            <TouchableOpacity
+              style={styles.btnLogin3}
+              activeOpacity={0.8}
+              onPress={validate}>
+              <Text style={{fontSize: 16, fontWeight: 'bold', color: '#fff'}}>
+                Đăng nhập
+              </Text>
+            </TouchableOpacity>
             <Text style={styles.OtherSignIn}>- {t('Or')} -</Text>
             <TouchableOpacity
               style={styles.gg}
@@ -95,6 +144,14 @@ const SignIn = ({navigation}) => {
                 </Text>
               </View>
             </TouchableOpacity>
+            <View style={styles.footer1}>
+              <Text style={{fontSize: 16}}>Bạn chưa có tài khoản? </Text>
+              <Text
+                style={{fontSize: 16, color: COLORS.custom, fontWeight: '600'}}
+                onPress={() => navigation.navigate('Register')}>
+                Đăng ký
+              </Text>
+            </View>
             {/* Button sign in with facebook
             <TouchableOpacity
               style={styles.gg}
@@ -127,12 +184,16 @@ const styles = StyleSheet.create({
   },
   header: {
     flex: 1,
-
   },
   imgBackground: {
-    bottom:20,
+    bottom: 20,
     width: 400,
     height: 250,
+  },
+  footer1: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginTop: 20,
   },
   footer: {
     flex: 2.8,
@@ -149,6 +210,15 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     alignSelf: 'flex-start',
     marginVertical: 25,
+  },
+  btnLogin3: {
+    height: 45,
+    backgroundColor: COLORS.custom,
+    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    marginTop: 10,
   },
   btnLogin: {
     backgroundColor: COLORS.custom,
@@ -171,7 +241,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: 'row',
     backgroundColor: '#ffff',
-    borderRadius: 5,
+    borderRadius: 20,
     borderColor: '#C5C5C5',
     borderWidth: 1.5,
     height: 42,
