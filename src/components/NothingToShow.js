@@ -30,13 +30,4 @@ export default NothingToShow;
 
 
 
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
-    zIndex: 1,
-  },
-});
 
-export default NothingToShow;
