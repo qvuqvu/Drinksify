@@ -3,7 +3,7 @@ import React from 'react';
 import styles from '../styles/View.Payment.container';
 import NumberFormat from 'react-number-format';
 import {useTranslation} from 'react-i18next';
-
+/* thanh toán sản phẩm */
 const ProductPayment = ({item}) => {
   const {t} = useTranslation();
 
@@ -37,5 +37,5 @@ const ProductPayment = ({item}) => {
     </View>
   );
 };
-
+/* thanh toán sản phẩm */
 export default ProductPayment;

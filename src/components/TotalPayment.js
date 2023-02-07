@@ -22,14 +22,13 @@ const TotalPayment = () => {
     </View>
   );
 };
-
+/*tổng giá tiền*/
 const TotalPrice = ({total, amount}) => {
   const {t} = useTranslation();
   return (
     <View>
       <Text style={{color: 'white'}}>
-        {t('DeliveryPayment')} {amount}{' '}
-        {amount == 1 ? t('Item') : t('Items')}
+        {t('DeliveryPayment')} {amount} {amount == 1 ? t('Item') : t('Items')}
       </Text>
       <Text style={{fontWeight: '600', color: 'white'}}>
         <NumberFormat
@@ -43,5 +42,5 @@ const TotalPrice = ({total, amount}) => {
     </View>
   );
 };
-
+/*tổng giá tiền*/
 export default TotalPayment;

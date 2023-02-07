@@ -5,7 +5,7 @@ import {selectHistory} from '../redux/orderDetailSlide';
 import convertTimeToFB from '../utils/convertTimeToFB';
 import COLORS from '../common/Color';
 import {useTranslation} from 'react-i18next';
-
+/* lịch sử thanh toán*/
 const HistoryOrder = () => {
   const his = useSelector(selectHistory);
   const {t} = useTranslation();
