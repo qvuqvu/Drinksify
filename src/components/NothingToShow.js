@@ -28,19 +28,7 @@ const styles = StyleSheet.create({
 
 export default NothingToShow;
 
-const NothingToShow = ({uri}) => {
-  const {t} = useTranslation();
-  return (
-    <View style={[StyleSheet.absoluteFillObject, styles.container]}>
-      <LottieView source={uri} autoPlay loop />
-      <View style={{position: 'absolute', bottom: 80}}>
-        <Text style={{fontSize: 16, color: 'black', fontWeight: '500'}}>
-          {t('Nothing to show')} !
-        </Text>
-      </View>
-    </View>
-  );
-};
+
 
 const styles = StyleSheet.create({
   container: {
