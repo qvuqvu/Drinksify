@@ -10,7 +10,7 @@ import {
 } from '../redux/addressSlice';
 import FormatText from '../utils/FormatText';
 import {useTranslation} from 'react-i18next';
-
+/*Thông báo hoàn thành*/
 const AlertCompleted = () => {
   const {t} = useTranslation();
   const address = useSelector(selectedAddress);

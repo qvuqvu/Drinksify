@@ -21,7 +21,7 @@ import {clearNote, selectNote} from '../redux/orderSlice';
 import {useTranslation} from 'react-i18next';
 import {calculatorDiscount} from '../utils/solveVoucher';
 import {calculatorTotal} from '../utils/solveVoucher';
-
+/* Nút bấm hoàn thành thanh toán*/
 const BtnCompletePayment = () => {
   const arrProduct = useSelector(state => state.orders.list);
   const {t} = useTranslation();
@@ -39,7 +39,7 @@ const BtnCompletePayment = () => {
   let time = null;
   let address = useSelector(selectedAddress);
 
-  const addOrderToFireBase = async () => {  
+  const addOrderToFireBase = async () => {
     await firestore()
       .collection('Orders')
       .add({
@@ -119,6 +119,7 @@ const BtnCompletePayment = () => {
       });
     }
   };
+  /* Nút bấm hoàn thành thanh toán*/
   const checkLocation = async () => {
     let check = false;
     await firestore()
@@ -155,8 +156,7 @@ const BtnCompletePayment = () => {
       );
     } else {
       const check = await checkLocation();
-      if (check)
-      dispatch(openOrCloseModel());
+      if (check) dispatch(openOrCloseModel());
     }
   };
   return (

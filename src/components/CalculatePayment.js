@@ -11,7 +11,7 @@ import {useSelector} from 'react-redux';
 import {calculatorDiscount, calculatorTotal} from '../utils/solveVoucher';
 import COLORS from '../common/Color';
 import {useTranslation} from 'react-i18next';
-
+/* tính tiền */
 const CalculatePayment = () => {
   const {t} = useTranslation();
   const total = calculatorTotal();
@@ -27,7 +27,7 @@ const CalculatePayment = () => {
     </View>
   );
 };
-
+/* tính tiền */
 const Total = ({title, content}) => {
   return (
     <View>

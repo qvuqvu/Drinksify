@@ -9,7 +9,7 @@ import {addProduct, removeAllProduct} from '../redux/orderSlice';
 import fireStore from '@react-native-firebase/firestore';
 import {useTranslation} from 'react-i18next';
 import {removeVoucher} from '../redux/voucherSlice';
-
+/* đặt hàng*/
 const BtnActionOrder = ({state, orderID}) => {
   return (
     <View style={[styles.layout, {marginTop: 10}]}>
@@ -31,7 +31,7 @@ const BtnActionOrder = ({state, orderID}) => {
     </View>
   );
 };
-
+/*đặt hàng*/
 const BtnReOrder = ({orderID}) => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
@@ -67,7 +67,7 @@ const BtnReOrder = ({orderID}) => {
     }
     addProductToShopping(arrDetailOrder);
   };
-
+  /* thêm sản phẩm */
   function addProductToShopping(arrDetailOrder) {
     arrDetailOrder.forEach(item => {
       const value = {
@@ -81,7 +81,7 @@ const BtnReOrder = ({orderID}) => {
       dispatch(action);
     });
   }
-
+  /* thêm sản phẩm */
   function calculatorPrice(item) {
     let result = 0;
     if (item.toppingIDs.length != 0)

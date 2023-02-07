@@ -30,7 +30,7 @@ const AddressPayment = () => {
     </View>
   );
 };
-
+/* Header*/
 const Header = () => {
   const {t} = useTranslation();
   return (
@@ -41,7 +41,7 @@ const Header = () => {
     </View>
   );
 };
-
+/* Header*/
 const Bot = () => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
@@ -121,7 +121,7 @@ const BodyUser = ({address}) => {
     </View>
   );
 };
-
+/* Chọn thời gian*/
 const BtnChooseTime = () => {
   const {t} = useTranslation();
   const dispatch = useDispatch();
