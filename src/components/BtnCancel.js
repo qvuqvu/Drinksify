@@ -37,5 +37,27 @@ export default BtnCancel = ({orderID}) => {
           historyID = doc.id;
         });
       });
+     await fireStore().collection('OrderHistories').doc(historyID).update({
+      cancelledTime: fireStore.Timestamp.now(),
+    });
+    await fireStore().collection('Orders').doc(orderID).update({
+      state: 'cancelled',
+    });
+    dispatch(setFalseWaitForDelete());
+    showMessage({
+      message: t('Order canceled successfully'),
+      description: t('Drinksify is pleased to serve you'),
+      type: 'danger',
+    });
+  };
+  return (
+    <TouchableOpacity
+      onPress={createTwoButtonAlert}
+      style={{backgroundColor: COLORS.custom, borderRadius: 10}}>
+      <Text style={styles.textAction}>{t('Cancel')}</Text>
+    </TouchableOpacity>
+  );
+};
+
 
    
