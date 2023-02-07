@@ -51,7 +51,7 @@ const Navigation = () => {
       .collection('Orders')
       .where('userID', '==', fireauth().currentUser.uid)
       .onSnapshot(snapShot => {
-        let change = snapShot.docChanges;
+        let change = snapShot.docChanges();
         change.forEach(change => {
           if (change.type == 'modified') {
             if (change.doc.data().state == 'completed') {
