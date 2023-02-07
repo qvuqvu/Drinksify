@@ -173,3 +173,26 @@ const Navigation = () => {
   );
 };
 export default Navigation;
+
+
+
+ const lang = useSelector(state => state.lang);
+  const {t, i18n} = useTranslation();
+  useEffect(() => {
+    firestore()
+      .collection('Orders')
+      .where('userID', '==', fireauth().currentUser.uid)
+      .onSnapshot(snapShot => {
+        let change = snapShot.docChanges();
+        change.forEach(change => {
+          if (change.type == 'modified') {
+            if (change.doc.data().state == 'completed') {
+              onDisplayNotification(change.doc.data().orderID);
+            }
+          }
+        });
+      });
+  }, []);
+  useEffect(() => {
+    i18n.changeLanguage(lang);
+  }, [lang]);
